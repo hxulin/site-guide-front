@@ -1,0 +1,32 @@
+// Cover some element-ui styles
+
+/* 适配 IE */
+.el-table__header, .el-table__body {
+  width: 100% !important;
+}
+
+.el-input-group__append {
+  color: #FFFFFF;
+  background-color: $--color-primary;
+  border-color: $--color-primary;
+
+  &:hover {
+    background: $--color-primary-hover;
+    border-color: $--color-primary-hover;
+  }
+}
+
+.el-pagination {
+  text-align: center;
+  margin-top: 10px;
+  padding: 0;
+}
+
+/* 弹框样式自定义 */
+.el-dialog__body {
+  padding: 30px;
+
+  .el-form-item__label, .el-input__inner, .el-textarea__inner {
+    font-size: 16px;
+  }
+}
