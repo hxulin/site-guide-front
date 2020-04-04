@@ -21,7 +21,7 @@
             <el-option label="前端" value="0"></el-option>
             <el-option label="后端" value="1"></el-option>
           </el-select>
-          <el-button slot="append" @click="search(1)" icon="el-icon-search"></el-button>
+          <el-button slot="append" type="primary" @click="search(1)" icon="el-icon-search"></el-button>
         </el-input>
       </div>
       <el-table ref="table" :data="tableData" border height="calc(100vh - 230px)">

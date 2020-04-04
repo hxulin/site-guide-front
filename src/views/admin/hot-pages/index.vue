@@ -14,7 +14,7 @@
             size="small"
             v-model="queryParams.keyword"
             class="fr">
-          <el-button slot="append" @click="search(1)" icon="el-icon-search"></el-button>
+          <el-button slot="append" type="primary" @click="search(1)" icon="el-icon-search"></el-button>
         </el-input>
       </div>
       <el-table ref="table" :data="tableData" border height="calc(100vh - 230px)">
