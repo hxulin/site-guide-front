@@ -6,19 +6,6 @@ import theme from './theme'
 import {getToken} from '@/utils/auth'
 
 /**
- * @Author: HuangXuLin
- * @Description: String原型增强
- */
-function stringPrototypeEnhance() {
-  String.prototype.format = function () {
-    var values = arguments;
-    return this.replace(/\{(\d+)\}/g, function (match, index) {
-      return values.length > index ? values[index] : '';
-    });
-  };
-}
-
-/**
  * 主菜单路由
  */
 const MAIN_MENU_ROUTE = [
@@ -97,7 +84,6 @@ function windowResize() {
  * @Description: 初始化操作
  */
 export function init() {
-  stringPrototypeEnhance();
   theme.init();
   routeGuard();
   windowResize();

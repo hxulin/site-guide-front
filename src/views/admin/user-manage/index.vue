@@ -3,11 +3,6 @@
     <el-card class="box-card" shadow="never">
       <div slot="header">用户管理</div>
       <div class="opt clear-float">
-        <el-button
-            @click="handleBatchDel"
-            type="primary" size="small"
-            icon="el-icon-delete"
-            class="fl">删除</el-button>
         <el-input
             @input="search(1)"
             clearable
@@ -19,11 +14,6 @@
         </el-input>
       </div>
       <el-table ref="table" :data="tableData" border height="calc(100vh - 230px)">
-        <el-table-column
-            type="selection"
-            align="center"
-            width="50">
-        </el-table-column>
         <el-table-column label="序号" width="80" align="center">
           <template slot-scope="scope">
             {{ (queryParams.currentPage - 1) * queryParams.pageSize + scope.$index + 1 }}
@@ -60,24 +50,21 @@
             <el-switch
                 v-model="scope.row.status"
                 @change="freezeAccount(scope.row)"
+                :disabled="!$store.getters.adminMode"
                 :active-value="0"
                 :inactive-value="1">
             </el-switch>
           </template>
         </el-table-column>
         <el-table-column
+            v-if="$store.getters.adminMode"
             label="操作"
             align="center"
-            width="160">
+            width="94">
           <template slot-scope="scope">
             <el-button
                 size="mini"
                 @click="handleEdit(scope.row)">修改
-            </el-button>
-            <el-button
-                size="mini"
-                type="danger"
-                @click="handleDel(scope.row)">删除
             </el-button>
           </template>
         </el-table-column>
@@ -118,7 +105,7 @@
 
 <script>
   import MyDialog from '@/components/MyDialog'
-  import {saveUser, listUser, delUser} from '@/api/admin/user-manage'
+  import {saveUser, listUser} from '@/api/admin/user-manage'
 
   export default {
     components: {
@@ -165,32 +152,6 @@
       // 重置
       reset() {
         this.form = {...this.tableData.find(item => {return item.id === this.form.id})};
-      },
-      // 批量删除
-      handleBatchDel() {
-        if (this.$refs.table.selection.length > 0) {
-          this.del(this.$refs.table.selection, '此操作将永久删除这些记录，是否继续？');
-        }
-      },
-      // 单条记录删除
-      handleDel(row) {
-        this.del([row], '此操作将永久删除这条记录，是否继续？');
-      },
-      // 公共删除方法
-      del(data, message) {
-        this.$confirm(message, '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-          delUser(data).then(({msg}) => {
-            this.search(this.queryParams.currentPage);
-            this.$message({
-              type: 'success',
-              message: msg
-            });
-          });
-        }).catch(() => {});
       },
       // 修改按钮事件
       handleEdit(row) {

@@ -18,7 +18,10 @@ const getters = {
   loginInit: state => state.user.loginInit,
 
   // 用户 token
-  token: state => state.user.token
+  token: state => state.user.token,
+
+  // 管理员模式, 标识后台管理页面的表单是否可编辑
+  adminMode: state => state.user.userGroup === 'admin'
 
 };
 

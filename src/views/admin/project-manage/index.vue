@@ -3,7 +3,7 @@
     <el-card class="box-card" shadow="never">
       <div slot="header">项目管理</div>
       <div class="opt clear-float">
-        <el-button-group class="fl">
+        <el-button-group class="fl" v-if="$store.getters.adminMode">
           <el-button @click="handleAdd" type="primary" size="small" icon="el-icon-plus">新增</el-button>
           <el-button @click="handleBatchDel" type="primary" size="small" icon="el-icon-delete">删除</el-button>
         </el-button-group>
@@ -26,6 +26,7 @@
       </div>
       <el-table ref="table" :data="tableData" border height="calc(100vh - 230px)">
         <el-table-column
+            v-if="$store.getters.adminMode"
             type="selection"
             align="center"
             width="50">
@@ -65,6 +66,7 @@
             label="首页展示">
           <template slot-scope="scope">
             <el-switch
+                :disabled="!$store.getters.adminMode"
                 v-model="scope.row.status"
                 @change="homePageShow(scope.row)"
                 :active-value="0"
@@ -73,6 +75,7 @@
           </template>
         </el-table-column>
         <el-table-column
+            v-if="$store.getters.adminMode"
             label="操作"
             align="center"
             width="160">

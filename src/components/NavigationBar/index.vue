@@ -29,36 +29,25 @@
       ThemePicker
     },
     data() {
+      const menuList = [{
+        path: '/home',
+        text: '主页'
+      }, {
+        path: '/download',
+        text: '下载'
+      }, {
+        path: '/about',
+        text: '关于'
+      }, {
+        path: '/admin/hot-pages',
+        text: '管理'
+      }];
       return {
         activeIndex: '0',
         menuList: {
           default: [],
-          user: [{
-            path: '/home',
-            text: '主页'
-          }, {
-            path: '/download',
-            text: '下载'
-          }, {
-            path: '/about',
-            text: '关于'
-          }, {
-            path: '/admin/hot-pages',
-            text: '管理'
-          }],
-          admin: [{
-            path: '/home',
-            text: '主页'
-          }, {
-            path: '/download',
-            text: '下载'
-          }, {
-            path: '/about',
-            text: '关于'
-          }, {
-            path: '/admin/hot-pages',
-            text: '管理'
-          }]
+          user: menuList,
+          admin: menuList
         }
       }
     },

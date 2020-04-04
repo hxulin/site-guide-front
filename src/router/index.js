@@ -34,6 +34,9 @@ export default new Router({
     path: '/about',
     component: () => import('@/views/about')
   }, {
+    path: '/404',
+    component: () => import('@/views/error/404'),
+  }, {
     path: '',
     component: Layout,
     redirect: '/home',
@@ -50,5 +53,8 @@ export default new Router({
       path: '/admin/client-settings',
       component: () => import('@/views/admin/client-settings')
     }]
+  }, {
+    path: '*',
+    redirect: '/404'
   }]
 });

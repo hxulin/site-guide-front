@@ -1,7 +1,7 @@
 import request from '@/utils/request'
 
 /**
- * 保存项目记录
+ * 保存用户记录
  */
 export function saveUser(data) {
   return request({
@@ -12,22 +12,11 @@ export function saveUser(data) {
 }
 
 /**
- * 查询项目列表记录
+ * 查询用户列表记录
  */
 export function listUser(data) {
   return request({
     url: '/user/list',
-    method: 'post',
-    data
-  })
-}
-
-/**
- * 删除项目记录
- */
-export function delUser(data) {
-  return request({
-    url: '/auth/user/del',
     method: 'post',
     data
   })
