@@ -14,6 +14,7 @@ const service = axios.create({
 // 请求拦截器
 service.interceptors.request.use(
   config => {
+    store.dispatch('loadingCountIncrease');  // 添加页面加载动画
     if (store.getters.token) {
       // 给每一个请求添加 Token
       config.headers['Authorization'] = store.getters.token;
@@ -28,6 +29,7 @@ service.interceptors.request.use(
 // 响应拦截器
 service.interceptors.response.use(
   response => {
+    store.dispatch('loadingCountReduce');  // 移除页面加载动画
     if (response.headers['content-type'] === 'application/json') {
       const result = response.data;
       if (result.code) {
@@ -54,6 +56,7 @@ service.interceptors.response.use(
     return response;
   },
   error => {
+    store.dispatch('loadingCountReduce');  // 移除页面加载动画
     const {response} = error;
     store.dispatch('promptErrorMsg', response ? '发生未知错误，请联系系统管理员' : '当前网络连接不可用');
     return Promise.reject(error);

@@ -21,7 +21,10 @@ const getters = {
   token: state => state.user.token,
 
   // 管理员模式, 标识后台管理页面的表单是否可编辑
-  adminMode: state => state.user.userGroup === 'admin'
+  adminMode: state => state.user.userGroup === 'admin',
+
+  // 是否全屏显示加载动画
+  loading: state => state.app.loadingCount > 0
 
 };
 

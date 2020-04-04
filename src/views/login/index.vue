@@ -16,7 +16,10 @@
                     @keyup.enter.native.prevent="handleLogin"></el-input>
               </el-form-item>
               <el-form-item>
-                <el-button type="primary" :disabled="loginBtnDisabled" @click="handleLogin">登录</el-button>
+                <el-button
+                    type="primary"
+                    :disabled="$store.getters.loading"
+                    @click="handleLogin">登录</el-button>
               </el-form-item>
             </el-form>
           </div>
@@ -42,34 +45,16 @@
           password: [
             {required: true, message: ' ', trigger: 'change'}
           ]
-        },
-        loginBtnDisabled: false
+        }
       }
-    },
-    updated() {
-      this.loginBtnDisabled = false;
     },
     methods: {
       // 登录
       handleLogin() {
         this.$refs['form'].validate(valid => {
           if (valid) {
-            this.loginBtnDisabled = true;
-            const loading = this.$loading({
-              lock: true,
-              text: '正在登录，请稍候...',
-              spinner: 'el-icon-loading',
-              background: 'rgba(255, 255, 255, 0.8)'
-            });
             this.$store.dispatch('login', this.form.password)
-              .then(() => {
-                this.$router.push({path: this.$route.query.redirect || '/'});
-                loading.close();
-              })
-              .catch(() => {
-                this.loginBtnDisabled = false;
-                loading.close();
-              });
+              .then(() => this.$router.push({path: this.$route.query.redirect || '/'}));
           }
         });
       }

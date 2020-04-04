@@ -7,7 +7,10 @@
           <li class="dns">
             <div class="label">客户端DNS地址设置</div>
             <el-form-item prop="localDnsAddress">
-              <el-input :disabled="!$store.getters.adminMode" v-model="form.localDnsAddress" placeholder="请输入DNS地址，如：192.168.1.1"></el-input>
+              <el-input
+                  :disabled="!$store.getters.adminMode"
+                  v-model="form.localDnsAddress"
+                  placeholder="请输入DNS地址，如：192.168.1.1"></el-input>
             </el-form-item>
             <div class="explain">客户端DNS地址是客户端所在的局域网的网关地址，用于指导客户端寻找正确的内网IP地址。</div>
           </li>
@@ -22,13 +25,20 @@
                   range :min="1" :max="720">
               </el-slider>
               <el-tooltip effect="dark" content="3 小时 ~ 6 小时 30 分钟" placement="bottom-end">
-                <el-button :disabled="!$store.getters.adminMode" @click="setDefaultVal" plain size="small">默认值</el-button>
+                <el-button
+                    :disabled="!$store.getters.adminMode"
+                    @click="setDefaultVal" plain size="small">默认值</el-button>
               </el-tooltip>
             </div>
             <div class="explain">该设置项用来指定客户端多长时间更新一次IP信息，客户端更新IP的频率会在当前设定的时间内取一个随机值。</div>
           </li>
         </ul>
-        <el-button v-if="$store.getters.adminMode" @click="saveConf" style="margin-top: 20px" type="primary">保存</el-button>
+        <el-button
+            v-if="$store.getters.adminMode"
+            :disabled="$store.getters.loading"
+            @click="saveConf"
+            style="margin-top: 20px"
+            type="primary">保存</el-button>
       </el-form>
     </el-card>
   </div>

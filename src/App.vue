@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" v-loading.fullscreen.lock="$store.getters.loading">
     <router-view/>
   </div>
 </template>

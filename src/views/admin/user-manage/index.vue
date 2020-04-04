@@ -95,7 +95,7 @@
           <el-switch v-model="form.status" :active-value="0" :inactive-value="1"></el-switch>
         </el-form-item>
         <el-form-item style="margin-bottom: 0">
-          <el-button type="primary" @click="save">保存</el-button>
+          <el-button type="primary" :disabled="$store.getters.loading" @click="save">保存</el-button>
           <el-button @click="reset">重置</el-button>
         </el-form-item>
       </el-form>

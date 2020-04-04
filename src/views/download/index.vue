@@ -32,7 +32,7 @@
                 <el-input v-model="form.authCode" show-password placeholder="第一次自定义"></el-input>
               </el-form-item>
               <el-form-item>
-                <el-button type="primary" @click="downloadClick">立即下载</el-button>
+                <el-button type="primary" :disabled="$store.getters.loading" @click="downloadClick">立即下载</el-button>
               </el-form-item>
             </el-form>
           </div>
@@ -105,19 +105,12 @@
               confirmButtonText: '朕知道了，现在下载',
               type: 'warning',
               callback: () => {
-                const loading = this.$loading({
-                  lock: true,
-                  text: '正在下载，请稍候...',
-                  spinner: 'el-icon-loading',
-                  background: 'rgba(255, 255, 255, 0.8)'
-                });
                 download(this.form).then(response => {
-                  loading.close();
                   const blob = new Blob([response.data], {
                     type: response.headers['content-type']
                   });
                   FileSaver.saveAs(blob, 'site-guide.exe');
-                }).catch(() => loading.close());
+                });
               }
             });
           }

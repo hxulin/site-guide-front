@@ -13,7 +13,10 @@ const app = {
     screenHeight: document.documentElement.clientHeight,
 
     // 标识全局是否提示错误信息
-    promptErrorMsg: true
+    promptErrorMsg: true,
+
+    // 记录正在加载中的请求数量
+    loadingCount: 0
 
   },
   mutations: {
@@ -26,6 +29,12 @@ const app = {
     },
     PROMPT_ERROR_MSG: (state, isPrompt) => {
       state.promptErrorMsg = isPrompt;
+    },
+    LOADING_COUNT_INCREASE: state => {
+      state.loadingCount += 1;
+    },
+    LOADING_COUNT_REDUCE: state => {
+      state.loadingCount -= 1;
     }
   },
   actions: {
@@ -54,6 +63,13 @@ const app = {
           callback: () => commit('PROMPT_ERROR_MSG', true)
         });
       }
+    },
+    loadingCountIncrease({commit}) {
+      commit('LOADING_COUNT_INCREASE');
+    },
+    loadingCountReduce({commit}) {
+      commit('LOADING_COUNT_REDUCE');
+
     }
   }
 };

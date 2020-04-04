@@ -4,7 +4,9 @@
     <div class="body">
       <user-list @click="itemClick"/>
       <div class="content">
-        <loading v-if="loading" style="margin-top: 30vh"/>
+        <div v-if="loading">
+          <loading v-if="!$store.getters.loading" style="margin-top: 30vh"/>
+        </div>
         <el-scrollbar v-else :key="$store.getters.screenHeight">
           <div style="padding: 15px 20px">
             <hot-pages-list
